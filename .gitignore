@@ -12,4 +12,16 @@
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+
+# Google Services (Firebase configuration)
+google-services.json
+app/google-services.json
+
+# Keystore files (Signing keys)
+*.jks
+*.keystore
+
+# Environment variables and secrets
+secrets.properties
+env.properties
+.env
