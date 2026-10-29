@@ -1,45 +1,56 @@
-<!-- res/layout/custom_dialog.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@drawable/rounded_dialog_background">
+    app:cardCornerRadius="28dp">
 
-    <TextView
-        android:id="@+id/tv_description"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/reach_developer"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/btn_whatsapp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WhatsApp"
-        android:textColor="@color/light_blue"
-        android:background="@drawable/white_button_background" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/reach_developer"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn_gmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gmail"
-        android:textColor="@color/light_blue"
-        android:background="@drawable/white_button_background"
-        android:layout_marginTop="8dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_whatsapp"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="WhatsApp"
+            app:cornerRadius="12dp" />
 
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:textColor="@android:color/holo_red_dark"
-        android:background="@drawable/white_button_background"
-        android:layout_marginTop="8dp" />
-</LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_gmail"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="Gmail"
+            app:cornerRadius="12dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="Cancel"
+            android:textColor="?attr/colorError"
+            app:cornerRadius="12dp"
+            app:strokeColor="?attr/colorError" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

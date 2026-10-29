@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
 
-    >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryContainer"
+        app:title="Bus Timings &amp; Schedule"
+        app:titleTextColor="?attr/colorOnPrimaryContainer" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="#1A237E">
+        android:layout_height="wrap_content"
+        android:padding="12dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button3"
-            android:layout_width="127dp"
-            android:layout_height="58dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginBottom="25dp"
-            android:text="BACK" />
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            app:cornerRadius="12dp" />
+
     </RelativeLayout>
 
     <ListView
         android:id="@+id/timingsListView"
         android:layout_width="match_parent"
-        android:layout_height="690dp"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_marginTop="4dp"
-        />
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:divider="?attr/colorOutlineVariant"
+        android:dividerHeight="1dp"
+        android:padding="8dp" />
 
-</RelativeLayout>
+</LinearLayout>

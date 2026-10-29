@@ -1,12 +1,19 @@
 package com.example.utis;
 
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,7 +24,7 @@ public class TravelLogActivity extends AppCompatActivity {
 
     private TextView travelLogTextView;
     private Button selectDateButton;
-    private SharedPreferences prefs;
+    private DatabaseReference travelLogRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,13 @@ public class TravelLogActivity extends AppCompatActivity {
 
         travelLogTextView = findViewById(R.id.travelLogTextView);
         selectDateButton = findViewById(R.id.selectDateButton);
-        prefs = getSharedPreferences("TravelPatterns", MODE_PRIVATE);
+
+        try {
+            travelLogRef = FirebaseDatabase.getInstance("https://busbuddy-18eb3-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .getReference("travel_logs");
+        } catch (Exception e) {
+            Log.e("TravelLogActivity", "Firebase Init Error: " + e.getMessage());
+        }
 
         // Set up the DatePickerDialog for date selection
         selectDateButton.setOnClickListener(v -> showDatePickerDialog());
@@ -36,7 +49,6 @@ public class TravelLogActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (DatePicker view, int year, int month, int dayOfMonth) -> {
-                    // Format selected date to yyyy-MM-dd
                     calendar.set(year, month, dayOfMonth);
                     String selectedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
 
@@ -50,16 +62,37 @@ public class TravelLogActivity extends AppCompatActivity {
     }
 
     private void displayTravelLogForDate(String date) {
-        // Get today's date
         String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        // Show travel log if it exists, otherwise display a relevant message
         if (date.compareTo(todayDate) > 0) {
             travelLogTextView.setText("YET TO TRAVEL");
-        } else {
-            String travelLog = prefs.getString(date, "No travel data available for this date.");
-            travelLogTextView.setText(travelLog);
+            return;
         }
+
+        if (travelLogRef == null) {
+            travelLogTextView.setText("No travel data available for this date.");
+            return;
+        }
+
+        travelLogTextView.setText("Loading travel log...");
+
+        travelLogRef.child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String log = snapshot.getValue(String.class);
+                    if (log != null && !log.isEmpty()) {
+                        travelLogTextView.setText(log);
+                        return;
+                    }
+                }
+                travelLogTextView.setText("No travel data available for this date.");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                travelLogTextView.setText("No travel data available for this date.");
+            }
+        });
     }
 }
-
