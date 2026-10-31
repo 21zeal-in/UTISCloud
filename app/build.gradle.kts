@@ -27,7 +27,7 @@ android {
         multiDexEnabled = true
 
         val mapsApiKey = localProperties.getProperty("MAPS_API_KEY")
-            ?: "AIzaSyBZtAqyEquGowCKvM0d-SEBAs6yctRP_sw"
+            ?: "YOUR_API_KEY_HERE"
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 

@@ -1,78 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".UTISApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/bus"
         android:label="@string/app_name"
-    android:roundIcon="@drawable/bus"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.UTIS"
-    tools:targetApi="31">
+        android:roundIcon="@drawable/bus"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UTIS"
+        tools:targetApi="31">
 
-    <activity
-        android:name="com.example.utis.MainActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
         <activity
-        android:name="com.example.utis.Schedule"
-        android:exported="false" />
+            android:name="com.example.utis.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <activity
-        android:name="com.example.utis.TimeActivity"
-        android:exported="false" />
-    <activity
-        android:name="com.example.utis.Other"
-        android:exported="false" />
-    <activity
-        android:name="com.example.utis.Admin"
-        android:exported="false" />
-    <activity
-        android:name="com.example.utis.AboutUs"
-        android:exported="false" />
-    <activity
-        android:name="com.example.utis.HomeActivity"
-        android:exported="false" />
         <activity
-            android:name="com.example.utis.ChatbotActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.utis.MapActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.utis.TempStopActivity"
-            android:exported="false" />
-        <activity android:name=".TravelLogActivity"
+            android:name="com.example.utis.HomeActivity"
             android:exported="false" />
 
-        <service
-            android:name=".LocationTrackingService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="location" />
+        <activity
+            android:name="com.example.utis.Schedule"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.utis.TimeActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <!-- Google Maps API key -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+    </application>
 
-</application>
-
-    </manifest>
+</manifest>
